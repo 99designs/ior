@@ -30,3 +30,16 @@ Because its using `go install` rather than `go build` it also leverages the pkg 
  - https://github.com/codegangsta/gin: This tool works in docker but uses a poll loop checking modified timestamps. This causes constant cpu load while running and nfs can cache the metadata.
  - https://github.com/pilu/fresh: Super configurable with nice output, but only uses fsevents/inotify so wont work over nfs boundaries.
  - https://github.com/tockins/realize: Full build system, lots of knobs, runs your tests, uses fsevents/inotify.
+
+## Releases
+
+This uses (GoReleaser](https://goreleaser.com) to build and release go binaries. There is a GitHub Actions workflow configured to run this on any new tags pushed. In order to create a new release, from the master branch:
+
+```
+git tag vx.x.x e.g. v1.0.0
+git push --tags
+```
+
+This should trigger the workflow to automatically create a new release. Once it has run, you should see a new release at https://github.com/99designs/ior/releases. Currently GoReleaser is configured to autogenerate a changelog based on commits.
+
+The configuration for GoReleaser is in [.goreleaser.yaml](./.goreleaser.yaml). This specifies what operating systems and architectures to build for along with any other customization we want. You can read more about what can be configured here: https://goreleaser.com/customization/
