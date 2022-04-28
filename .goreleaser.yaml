@@ -18,6 +18,9 @@ checksum:
   name_template: 'checksums.txt'
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
+archives:
+  - id: github
+    format: binary
 changelog:
   sort: asc
   filters:
